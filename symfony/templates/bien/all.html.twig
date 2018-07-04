@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes biens{% endblock %}
+
+{% block body %}
+<h2>Tous les biens</h2>
+
+<ul>
+{% for bien in biens %}
+    <li>{{ bien.localisation }}</li>
+{% else %}
+    <li>Aucun bien</li>
+{% endfor %}
+</ul>
+
+<h2>Tous mes biens <a href="{{ path('add_bien') }}">Add</a></h2>
+
+<ul>
+{% for bien in own_biens %}
+    <li>{{ bien.localisation }} <a href="{{ path('edit_bien', { id: bien.bien.id }) }}">Modifier</a></li>
+{% else %}
+    <li>Aucun bien</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

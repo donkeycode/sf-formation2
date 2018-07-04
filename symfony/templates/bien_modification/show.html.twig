@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BienModification{% endblock %}
+
+{% block body %}
+    <h1>BienModification</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ bien_modification.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ bien_modification.longitude }}</td>
+            </tr>
+            <tr>
+                <th>Localisation</th>
+                <td>{{ bien_modification.localisation }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ bien_modification.state }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ bien_modification.createdAt ? bien_modification.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ bien_modification.updatedAt ? bien_modification.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bien_modification_index') }}">back to list</a>
+
+    <a href="{{ path('bien_modification_edit', {'bien': bien_modification.bien.id}) }}">edit</a>
+
+    {{ include('bien_modification/_delete_form.html.twig') }}
+{% endblock %}

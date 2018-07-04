@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Bien;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use App\Entity\Proprietaire;
 
 /**
  * @method Bien|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,13 @@ class BienRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Bien::class);
+    }
+
+    public function findPublished()
+    {
+        return $this->findBy([
+            'state' => 'published',
+        ]);
     }
 
 //    /**

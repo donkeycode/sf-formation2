@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BienModification index{% endblock %}
+
+{% block body %}
+    <h1>BienModification index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Localisation</th>
+                <th>State</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bien_modification in bien_modifications %}
+            <tr>
+                <td>{{ bien_modification.latitude }}</td>
+                <td>{{ bien_modification.longitude }}</td>
+                <td>{{ bien_modification.localisation }}</td>
+                <td>{{ bien_modification.state }}</td>
+                <td>{{ bien_modification.createdAt ? bien_modification.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ bien_modification.updatedAt ? bien_modification.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('bien_modification_show', {'bien': bien_modification.bien.id}) }}">show</a>
+                    <a href="{{ path('bien_modification_edit', {'bien': bien_modification.bien.id}) }}">edit</a>
+
+                    {% for transition in get_transitions(bien_modification) %}
+                        <a href="{{ path('bien_modification_apply', {'transition': transition.name, 'bien': bien_modification.bien.id}) }}">{{ transition.name }}</a>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bien_modification_new') }}">Create new</a>
+{% endblock %}

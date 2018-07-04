@@ -160,4 +160,9 @@ class Proprietaire implements UserInterface, \Serializable
             // $this->salt
         ) = unserialize($serialized, array('allowed_classes' => false));
     }
+
+    public function __toString() : string
+    {
+        return $this->getName();
+    }
 }

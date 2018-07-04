@@ -1,0 +1,25 @@
+framework:
+    workflows:
+        bien_validation:
+            type: 'state_machine'
+            marking_store:
+                type: 'single_state' 
+                arguments:
+                    - 'state'
+            supports:
+                - App\Entity\BienModification
+            initial_place: draft
+            places:
+                - draft
+                - in_review
+                - published
+            transitions:
+                to_review:
+                    from: draft
+                    to:   in_review
+                publish:
+                    from: in_review
+                    to:   published
+                reject:
+                    from: in_review
+                    to:   draft

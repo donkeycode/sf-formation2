@@ -2,13 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Bien;
+use App\Entity\BienModification;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class BienType extends AbstractType
+class BienModificationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -16,7 +15,15 @@ class BienType extends AbstractType
             ->add('latitude')
             ->add('longitude')
             ->add('localisation')
-            ->add('submit', SubmitType::class)
+            ->add('state')
+            ->add('proprietaire')
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => BienModification::class,
+        ]);
     }
 }
