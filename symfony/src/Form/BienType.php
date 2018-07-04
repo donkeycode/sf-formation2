@@ -6,6 +6,7 @@ use App\Entity\Bien;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class BienType extends AbstractType
 {
@@ -15,6 +16,7 @@ class BienType extends AbstractType
             ->add('latitude')
             ->add('longitude')
             ->add('localisation')
+            ->add('submit', SubmitType::class)
         ;
     }
 

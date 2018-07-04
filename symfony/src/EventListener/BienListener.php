@@ -21,19 +21,23 @@ class BienListener
 
         $bm = new BienModification();
         $bm->setBien($entity);
+        $bm->setProprietaire($entity->getProprietaire());
 
-        $cols = $entityManager->getClassMetadata(Bien::class)->getColumnNames();
+        $copy = function($cols, $excludes) use ($bm, $entity) {
+            foreach ($cols as $col) {
+                if (in_array($col, $excludes)) {
+                    continue;
+                }
 
-        foreach ($cols as $col) {
-            if (in_array($col, ['id'])) {
-                continue;
+                $set = 'set'.Inflector::classify($col);
+                $get = 'get'.Inflector::classify($col);
+
+                $bm->$set($entity->$get());
             }
+        };
 
-            $set = 'set'.Inflector::classify($col);
-            $get = 'get'.Inflector::classify($col);
-
-            $bm->$set($entity->$get());
-        }
+        $copy($entityManager->getClassMetadata(Bien::class)->getAssociationNames(), ['leads']);
+        $copy($entityManager->getClassMetadata(Bien::class)->getColumnNames(), ['id']);
 
         $entityManager->persist($bm);
     }
