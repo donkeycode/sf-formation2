@@ -33,7 +33,6 @@ class BienModificationController extends Controller
 
         $workflow->apply($bienModification, $transition);
         $em = $this->getDoctrine()->getManager();
-        $em->persist($bienModification);
         $em->flush();
 
         return $this->redirectToRoute('bien_modification_index');
