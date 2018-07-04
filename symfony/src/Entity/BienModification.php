@@ -13,19 +13,19 @@ class BienModification
 
     /**
      * @ORM\Id()
-     * @ORM\Column(type="integer")
      * @ORM\OneToOne(targetEntity=Bien::class)
+     * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    private $bien;
 
-    public function getId()
+    public function getBien(): Bien
     {
-        return $this->id;
+        return $this->bien;
     }
 
-    public function setBien(Bien $bien)
+    public function setBien(Bien $bien): self
     {
-        $this->id = $bien->getId();
+        $this->bien = $bien;
 
         return $this;
     }
