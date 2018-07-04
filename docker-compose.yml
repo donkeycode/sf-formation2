@@ -19,11 +19,11 @@ services:
     command: --sql_mode="" --default-time-zone="+00:00"  --innodb-buffer-pool-size=8G --innodb-log-buffer-size=256M --innodb-log-file-size=1G --innodb-write-io-threads=16 --innodb-flush-log-at-trx-commit=0
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: vetclic
-      MYSQL_USER: vetclic
-      MYSQL_PASSWORD: vetclic
+      MYSQL_DATABASE: iad
+      MYSQL_USER: iad
+      MYSQL_PASSWORD: iad
     volumes:
-      - "../mysql_vetclic:/var/lib/mysql"
+      - "../mysql:/var/lib/mysql"
   php:
     image: donkeycode/php-symfony
     volumes:
