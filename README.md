@@ -1,7 +1,7 @@
 # sf-formation2
 
 
-## Application de vente de bien PAP (multilangue) 
+## Application de vente de biens PAP (multilangue) 
 
 Front 
  - User Login
