@@ -1,0 +1,61 @@
+version: '2'
+services:
+  # cucumber:
+  #   image: donkeycode/docker-for-cucumber
+  #   links:
+  #     - mailhog
+  #     - nginx
+  #     - php
+  #   volumes:
+  #     - ".:/code"
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+
+  db:
+    image: mysql:5.7
+    command: --sql_mode="" --default-time-zone="+00:00"  --innodb-buffer-pool-size=8G --innodb-log-buffer-size=256M --innodb-log-file-size=1G --innodb-write-io-threads=16 --innodb-flush-log-at-trx-commit=0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vetclic
+      MYSQL_USER: vetclic
+      MYSQL_PASSWORD: vetclic
+    volumes:
+      - "../mysql_vetclic:/var/lib/mysql"
+  php:
+    image: donkeycode/php-symfony
+    volumes:
+      - ./symfony:/var/www/symfony:rw
+    links:
+      - db
+      - mailhog
+      - elastic
+    
+  elastic:
+    image: elasticsearch:5.6.4
+    ports:
+      - "9200:9200"
+
+  nginx:
+    image: donkeycode/php-nginx
+    ports:
+      - "4242:80"
+    environment:
+      WEBDIR: /var/www/symfony/public
+      CONTROLLER_NAME: index
+    links:
+      - php
+    volumes:
+      - ./symfony/public:/var/www/symfony/public:rw
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8042:80
+    environment:
+        PMA_HOSTS: db
+    links:
+      - db
