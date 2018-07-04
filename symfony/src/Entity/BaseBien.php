@@ -27,7 +27,7 @@ trait BaseBien
     /**
      * @ORM\Column(type="string", columnDefinition="ENUM('draft', 'in_review', 'published')")
      */
-    private $state;
+    private $state = 'draft';
 
     /**
      * @ORM\Column(type="datetime")

@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProprietaireFixtures extends Fixture 
 {
+    const USER_BOB = 'bob';
+    
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
         $this->encoder = $encoder;
@@ -21,6 +23,8 @@ class ProprietaireFixtures extends Fixture
         $p1->setEmail('p1@gmail.com');
         $p1->setPassword($this->encoder->encodePassword($p1, 'demo'));
         $manager->persist($p1);
+
+        $this->addReference(self::USER_BOB, $p1);
 
         $manager->flush();
     }
