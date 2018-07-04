@@ -11,7 +11,7 @@ class CronManager
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="string", size="55")
+     * @ORM\Column(type="string", length=55)
      */
     private $id;
 
