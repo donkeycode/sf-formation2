@@ -11,8 +11,7 @@ class CronManager
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", size="55")
      */
     private $id;
 
@@ -29,6 +28,13 @@ class CronManager
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setId(string $id) : self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getLastExecutedAt(): ?\DateTimeInterface
